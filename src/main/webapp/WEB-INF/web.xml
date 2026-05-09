@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <display-name>HostelWebApp</display-name>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>AddStudentServlet</servlet-name>
+        <servlet-class>com.servlet.AddStudentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddStudentServlet</servlet-name>
+        <url-pattern>/AddStudent</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateStudentServlet</servlet-name>
+        <servlet-class>com.servlet.UpdateStudentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateStudentServlet</servlet-name>
+        <url-pattern>/UpdateStudent</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteStudentServlet</servlet-name>
+        <servlet-class>com.servlet.DeleteStudentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteStudentServlet</servlet-name>
+        <url-pattern>/DeleteStudent</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DisplayStudentsServlet</servlet-name>
+        <servlet-class>com.servlet.DisplayStudentsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DisplayStudentsServlet</servlet-name>
+        <url-pattern>/DisplayStudents</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReportServlet</servlet-name>
+        <servlet-class>com.servlet.ReportServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReportServlet</servlet-name>
+        <url-pattern>/Report</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReportCriteriaServlet</servlet-name>
+        <servlet-class>com.servlet.ReportCriteriaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReportCriteriaServlet</servlet-name>
+        <url-pattern>/ReportCriteria</url-pattern>
+    </servlet-mapping>
+
+</web-app>
