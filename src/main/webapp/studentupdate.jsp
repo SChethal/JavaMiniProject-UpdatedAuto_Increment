@@ -26,15 +26,15 @@
 
   .container { max-width: 650px; margin: 0 auto; padding: 0 20px 60px; }
 
-  .alert { border-radius: 12px; padding: 14px 18px; margin-bottom: 18px; font-size: 0.95rem; }
+  .alert { border-radius: 12px; padding: 16px 20px; margin-bottom: 20px;
+    font-size: 0.95rem; line-height: 1.6; font-weight: 500; }
   .alert-success { background: rgba(39,174,96,0.2); border: 1px solid #27ae60; color: #2ecc71; }
-  .alert-error   { background: rgba(231,76,60,0.2);  border: 1px solid #e74c3c; color: #ff6b6b; }
+  .alert-error   { background: rgba(231,76,60,0.2); border: 1px solid #e74c3c; color: #ff6b6b; }
 
   .card { background: rgba(255,255,255,0.08); backdrop-filter: blur(15px);
     border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 30px; margin-bottom: 24px; }
-  .card h2, .card h3 { font-weight: 700; font-size: 1.3rem; margin-bottom: 20px; }
-  .card h2 { color: #f39c12; }
-  .card h3 { color: #3498db; }
+  .card h2 { color: #f39c12; font-weight: 700; font-size: 1.3rem; margin-bottom: 20px; }
+  .card h3 { color: #3498db; font-weight: 700; font-size: 1.3rem; margin-bottom: 20px; }
 
   .search-row { display: flex; gap: 12px; }
   .search-row input { flex: 1; padding: 11px 15px; background: rgba(255,255,255,0.1);
@@ -43,32 +43,53 @@
   .search-row input::placeholder { color: rgba(255,255,255,0.4); }
   .search-row input:focus { border-color: #3498db; background: rgba(255,255,255,0.15); }
   .btn-search { padding: 11px 24px; background: linear-gradient(45deg,#3498db,#2980b9);
-    border: none; border-radius: 10px; color: white; font-weight: 600; cursor: pointer; transition: all 0.3s; }
-  .btn-search:hover { box-shadow: 0 4px 15px rgba(52,152,219,0.4); transform: translateY(-1px); }
+    border: none; border-radius: 10px; color: white; font-weight: 600; cursor: pointer; }
 
   .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
   @media(max-width:550px) { .row-2 { grid-template-columns: 1fr; } .card { padding: 20px; } }
 
   .field { margin-bottom: 18px; }
-  label { display: block; color: rgba(255,255,255,0.85); font-weight: 500; font-size: 0.9rem; margin-bottom: 7px; }
+  label { display: block; color: rgba(255,255,255,0.85); font-weight: 500;
+    font-size: 0.9rem; margin-bottom: 7px; }
   label .req { color: #e94560; }
+
   input[type="text"], input[type="number"], input[type="date"] {
     width: 100%; padding: 11px 15px; background: rgba(255,255,255,0.1);
     border: 1px solid rgba(255,255,255,0.25); border-radius: 10px;
     color: white; font-size: 0.95rem; outline: none; transition: all 0.3s; }
   input::placeholder { color: rgba(255,255,255,0.4); }
-  input:focus { border-color: #f39c12; background: rgba(255,255,255,0.15); box-shadow: 0 0 0 3px rgba(243,156,18,0.2); }
-  input.invalid { border-color: #e74c3c; box-shadow: 0 0 0 3px rgba(231,76,60,0.2); }
+  input:focus { border-color: #f39c12; background: rgba(255,255,255,0.15);
+    box-shadow: 0 0 0 3px rgba(243,156,18,0.2); }
+  input.invalid { border-color: #e74c3c !important;
+    box-shadow: 0 0 0 3px rgba(231,76,60,0.2) !important; }
   input:disabled { opacity: 0.5; cursor: not-allowed; }
   .err-msg { color: #ff6b6b; font-size: 0.8rem; margin-top: 5px; display: none; }
 
+  /* Current room info bar */
+  .current-room-bar {
+    background: rgba(39,174,96,0.12);
+    border: 1px solid rgba(39,174,96,0.35);
+    border-radius: 10px; padding: 10px 16px;
+    color: #2ecc71; font-size: 0.88rem; margin-bottom: 20px; }
+
+  /* Room duplicate warning */
+  .room-dup-warn {
+    display: none;
+    background: rgba(231,76,60,0.18);
+    border: 1px solid rgba(231,76,60,0.6);
+    border-radius: 10px; padding: 10px 14px;
+    margin-top: 8px; color: #ff6b6b;
+    font-size: 0.82rem; font-weight: 600; }
+  .room-dup-warn::before { content: "🚫 "; }
+
   .btn-update { width: 100%; padding: 13px; margin-top: 8px;
-    background: linear-gradient(45deg, #f39c12, #e67e22);
-    border: none; border-radius: 10px; color: white;
-    font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+    background: linear-gradient(45deg, #f39c12, #e67e22); border: none;
+    border-radius: 10px; color: white; font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: all 0.3s; }
   .btn-update:hover { box-shadow: 0 5px 20px rgba(243,156,18,0.5); transform: translateY(-2px); }
 
-  .back-links { text-align: center; margin-top: 20px; display: flex; gap: 12px; justify-content: center; }
+  .back-links { text-align: center; margin-top: 20px;
+    display: flex; gap: 12px; justify-content: center; }
   .back-links a { color: rgba(255,255,255,0.7); text-decoration: none; padding: 8px 20px;
     border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; font-size: 0.88rem; transition: all 0.3s; }
   .back-links a:hover { color: white; background: rgba(255,255,255,0.1); }
@@ -94,10 +115,13 @@
 
   <% String success = (String)request.getAttribute("success");
      String error   = (String)request.getAttribute("error");
-     if (success != null) { %><div class="alert alert-success">✅ <%= success %></div><% }
-     if (error   != null) { %><div class="alert alert-error">❌ <%= error %></div><% } %>
+     if (success != null) { %>
+       <div class="alert alert-success">✅ <%= success %></div>
+  <% } if (error != null) { %>
+       <div class="alert alert-error">❌ <%= error %></div>
+  <% } %>
 
-  <!-- Search Card -->
+  <!-- Search -->
   <div class="card">
     <h3>🔍 Find Student</h3>
     <form action="UpdateStudent" method="get">
@@ -108,14 +132,23 @@
     </form>
   </div>
 
-  <!-- Edit Form (shown only when student found) -->
+  <!-- Edit Form (shown only after search) -->
   <% Student s = (Student)request.getAttribute("student");
      if (s != null) { %>
   <div class="card">
-    <h2>✏️ Edit Details — ID: <%= s.getStudentID() %></h2>
+    <h2>✏️ Edit — Student ID: <%= s.getStudentID() %></h2>
+
+    <!-- Show current room clearly -->
+    <div class="current-room-bar">
+      🚪 Current Room: <strong><%= s.getRoomNumber() %></strong>
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      You may keep the same room or enter a different unoccupied room.
+    </div>
+
     <form action="UpdateStudent" method="post" id="updateForm" novalidate>
       <input type="hidden" name="studentID" value="<%= s.getStudentID() %>">
 
+      <!-- Disabled display only -->
       <div class="field">
         <label>Student ID</label>
         <input type="text" value="<%= s.getStudentID() %>" disabled>
@@ -123,31 +156,43 @@
 
       <div class="field">
         <label>Student Name <span class="req">*</span></label>
-        <input type="text" name="studentName" id="studentName" value="<%= s.getStudentName() %>" required>
+        <input type="text" name="studentName" id="studentName"
+               value="<%= s.getStudentName() %>" required>
         <div class="err-msg" id="nameErr">Name must contain only letters and spaces.</div>
       </div>
 
       <div class="row-2">
         <div class="field">
           <label>Room Number <span class="req">*</span></label>
-          <input type="text" name="roomNumber" id="roomNumber" value="<%= s.getRoomNumber() %>" required>
+          <input type="text" name="roomNumber" id="roomNumber"
+                 value="<%= s.getRoomNumber() %>"
+                 oninput="this.value=this.value.toUpperCase(); liveRoomCheck(this.value);"
+                 autocomplete="off" required>
           <div class="err-msg" id="roomErr">Room number is required.</div>
+          <div class="room-dup-warn" id="roomDupWarn">
+            Room already occupied by another student!
+          </div>
         </div>
         <div class="field">
           <label>Admission Date <span class="req">*</span></label>
-          <input type="date" name="admissionDate" id="admissionDate" value="<%= s.getAdmissionDate() %>" required>
+          <input type="date" name="admissionDate" id="admissionDate"
+                 value="<%= s.getAdmissionDate() %>" required>
         </div>
       </div>
 
       <div class="row-2">
         <div class="field">
-          <label>Fees Paid (₹)</label>
-          <input type="number" name="feesPaid" id="feesPaid" value="<%= s.getFeesPaid() %>" min="0" step="0.01">
+          <label>Fees Paid (₹) <span class="req">*</span></label>
+          <input type="number" name="feesPaid" id="feesPaid"
+                 value="<%= s.getFeesPaid() %>" min="0" step="0.01"
+                 oninput="if(this.value < 0) this.value = 0;">
           <div class="err-msg" id="paidErr">Cannot be negative.</div>
         </div>
         <div class="field">
-          <label>Pending Fees (₹)</label>
-          <input type="number" name="pendingFees" id="pendingFees" value="<%= s.getPendingFees() %>" min="0" step="0.01">
+          <label>Pending Fees (₹) <span class="req">*</span></label>
+          <input type="number" name="pendingFees" id="pendingFees"
+                 value="<%= s.getPendingFees() %>" min="0" step="0.01"
+                 oninput="if(this.value < 0) this.value = 0;">
           <div class="err-msg" id="pendingErr">Cannot be negative.</div>
         </div>
       </div>
@@ -164,24 +209,81 @@
 </div>
 
 <script>
+// ── Current student's own room (allowed to keep it) ──
+const ownRoom = "<%= s != null ? s.getRoomNumber().toUpperCase() : "" %>";
+let usedRooms = [];
+
+(function loadUsedRooms() {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', 'DisplayStudents', true);
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      const matches = xhr.responseText.matchAll(/class="room-tag">([^<]+)<\/span>/g);
+      for (const m of matches) usedRooms.push(m[1].trim().toUpperCase());
+    }
+  };
+  xhr.send();
+})();
+
+function liveRoomCheck(val) {
+  const warn  = document.getElementById('roomDupWarn');
+  const input = document.getElementById('roomNumber');
+  const upper = val.trim().toUpperCase();
+  // Only warn if it's NOT the student's own current room AND already used
+  if (upper.length >= 2 && upper !== ownRoom && usedRooms.includes(upper)) {
+    warn.style.display  = 'block';
+    input.classList.add('invalid');
+  } else {
+    warn.style.display  = 'none';
+    input.classList.remove('invalid');
+  }
+}
+
 const uf = document.getElementById('updateForm');
 if (uf) {
   uf.addEventListener('submit', function(e) {
     let valid = true;
     clearAll();
+
     const name    = document.getElementById('studentName');
     const room    = document.getElementById('roomNumber');
     const paid    = document.getElementById('feesPaid');
     const pending = document.getElementById('pendingFees');
-    if (!name.value.trim() || !/^[a-zA-Z ]+$/.test(name.value.trim())) { mark(name,'nameErr'); valid=false; }
-    if (!room.value.trim()) { mark(room,'roomErr'); valid=false; }
-    if (parseFloat(paid.value) < 0)    { mark(paid,'paidErr'); valid=false; }
-    if (parseFloat(pending.value) < 0) { mark(pending,'pendingErr'); valid=false; }
+
+    if (!name.value.trim() || !/^[a-zA-Z ]+$/.test(name.value.trim())) {
+      mark(name, 'nameErr', 'Name must contain only letters.'); valid = false;
+    }
+    if (!room.value.trim()) {
+      mark(room, 'roomErr', 'Room number is required.'); valid = false;
+    }
+    // Block if different room already occupied
+    const roomUpper = room.value.trim().toUpperCase();
+    if (roomUpper && roomUpper !== ownRoom && usedRooms.includes(roomUpper)) {
+      mark(room, 'roomErr', 'Room ' + roomUpper + ' is already occupied!');
+      document.getElementById('roomDupWarn').style.display = 'block';
+      valid = false;
+    }
+    if (parseFloat(paid.value) < 0) {
+      mark(paid, 'paidErr', 'Cannot be negative.'); valid = false;
+    }
+    if (parseFloat(pending.value) < 0) {
+      mark(pending, 'pendingErr', 'Cannot be negative.'); valid = false;
+    }
     if (!valid) e.preventDefault();
   });
 }
-function mark(f,id){ f.classList.add('invalid'); document.getElementById(id).style.display='block'; }
-function clearAll(){ document.querySelectorAll('input').forEach(i=>i.classList.remove('invalid')); document.querySelectorAll('.err-msg').forEach(e=>e.style.display='none'); }
+
+function mark(f, id, msg) {
+  f.classList.add('invalid');
+  document.getElementById(id).innerText = msg;
+  document.getElementById(id).style.display = 'block';
+}
+function clearAll() {
+  document.querySelectorAll('input').forEach(i => i.classList.remove('invalid'));
+  document.querySelectorAll('.err-msg').forEach(e => e.style.display = 'none');
+  const w = document.getElementById('roomDupWarn');
+  if (w) w.style.display = 'none';
+}
 </script>
 </body>
 </html>

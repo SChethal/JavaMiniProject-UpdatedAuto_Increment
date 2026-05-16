@@ -9,14 +9,14 @@ public class HostelDAO {
 
     private static final String URL  = "jdbc:mysql://localhost:3306/HostelDB";
     private static final String USER = "root";
-    private static final String PASS = "musab@123sql"; // ← change to your MySQL password
+    private static final String PASS = "musab@123sql"; // ← your MySQL password
 
     private Connection getConnection() throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         return DriverManager.getConnection(URL, USER, PASS);
     }
 
-    // ── GET NEXT AUTO-INCREMENT ID (to show in readonly field) ──────
+    // ── GET NEXT AUTO-INCREMENT ID ───────────────────────────────────
     public int getNextAutoIncrementID() {
         String sql = "SELECT AUTO_INCREMENT FROM information_schema.TABLES " +
                      "WHERE TABLE_SCHEMA = 'HostelDB' AND TABLE_NAME = 'HostelStudents'";
@@ -24,15 +24,30 @@ public class HostelDAO {
              PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             if (rs.next()) return rs.getInt("AUTO_INCREMENT");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); }
         return 1;
     }
 
-    // ── ADD STUDENT (ID is auto-incremented by DB) ──────────────────
+    // ── ROOM UNIQUENESS CHECK ────────────────────────────────────────
+    // Pass excludeStudentID = -1 when ADDING (no student to exclude)
+    // Pass excludeStudentID = actual ID when UPDATING (allow same room)
+    public boolean isRoomAllocated(String roomNumber, int excludeStudentID) {
+        String sql = "SELECT StudentID FROM HostelStudents " +
+                     "WHERE UPPER(RoomNumber) = UPPER(?) AND StudentID != ?";
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, roomNumber);
+            ps.setInt(2, excludeStudentID);
+            ResultSet rs = ps.executeQuery();
+            return rs.next(); // true = room is taken
+        } catch (Exception e) { e.printStackTrace(); }
+        return false;
+    }
+
+    // ── ADD STUDENT ──────────────────────────────────────────────────
     public boolean addStudent(Student s) {
-        String sql = "INSERT INTO HostelStudents (StudentName, RoomNumber, AdmissionDate, FeesPaid, PendingFees) " +
+        String sql = "INSERT INTO HostelStudents " +
+                     "(StudentName, RoomNumber, AdmissionDate, FeesPaid, PendingFees) " +
                      "VALUES (?, ?, ?, ?, ?)";
         try (Connection con = getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -42,10 +57,7 @@ public class HostelDAO {
             ps.setDouble(4, s.getFeesPaid());
             ps.setDouble(5, s.getPendingFees());
             return ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        } catch (Exception e) { e.printStackTrace(); return false; }
     }
 
     // ── UPDATE STUDENT ───────────────────────────────────────────────
@@ -61,10 +73,7 @@ public class HostelDAO {
             ps.setDouble(5, s.getPendingFees());
             ps.setInt(6, s.getStudentID());
             return ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        } catch (Exception e) { e.printStackTrace(); return false; }
     }
 
     // ── DELETE STUDENT ───────────────────────────────────────────────
@@ -74,10 +83,7 @@ public class HostelDAO {
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, id);
             return ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        } catch (Exception e) { e.printStackTrace(); return false; }
     }
 
     // ── GET ALL STUDENTS ─────────────────────────────────────────────
@@ -88,9 +94,7 @@ public class HostelDAO {
              PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) list.add(mapRow(rs));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); }
         return list;
     }
 
@@ -102,9 +106,7 @@ public class HostelDAO {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) return mapRow(rs);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); }
         return null;
     }
 
@@ -136,7 +138,8 @@ public class HostelDAO {
     // ── REPORT 3: By Date Range ──────────────────────────────────────
     public List<Student> getStudentsByDateRange(Date from, Date to) {
         List<Student> list = new ArrayList<>();
-        String sql = "SELECT * FROM HostelStudents WHERE AdmissionDate BETWEEN ? AND ? ORDER BY AdmissionDate";
+        String sql = "SELECT * FROM HostelStudents " +
+                     "WHERE AdmissionDate BETWEEN ? AND ? ORDER BY AdmissionDate";
         try (Connection con = getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setDate(1, from);

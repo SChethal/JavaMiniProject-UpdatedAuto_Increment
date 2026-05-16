@@ -62,7 +62,7 @@
 <body>
 
 <nav>
-  <a class="brand" href="index.jsp">🏨 HostelMS</a>
+  <a class="brand" href="index.jsp">🏨 Alva's Hostel</a>
   <div class="nav-links">
     <a href="DisplayStudents">All Students</a>
     <a href="Report">Reports</a>
